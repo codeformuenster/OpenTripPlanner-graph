@@ -9,10 +9,11 @@ RUN apk --no-cache add zip \
         # https://www.stadtwerke-muenster.de/privatkunden/mobilitaet/fahrplaninfos/fahr-netzplaene-downloads/open-data-gtfs/gtfs-download.html
         https://www.stadtwerke-muenster.de/fileadmin/stwms/busverkehr/kundencenter/dokumente/GTFS/stadtwerke_feed_20191028.zip \
     # add feed-info.txt to zip
-    && zip ./STWMS.zip ./feed-info.txt \
+    && zip ./STWMS.zip ./feed_info.txt \
     && curl -sSfL -o ./muenster-regbez.pbf \
         # https://download.geofabrik.de/europe/germany/nordrhein-westfalen/
         https://download.geofabrik.de/europe/germany/nordrhein-westfalen/muenster-regbez-191112.osm.pbf \
-    && java -Xmx10g -jar /opt/opentripplanner/otp-shaded.jar --build . \
+    && rm ./feed_info.txt \
+    && java -Xmx14g -jar /opt/opentripplanner/otp-shaded.jar --build . \
     && rm ./muenster-regbez.pbf ./STWMS.zip \
     && apk del zip
