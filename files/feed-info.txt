@@ -1,0 +1,2 @@
+feed_publisher_name,feed_publisher_url,feed_lang,feed_id
+dummy_publisher,dummy_url,de,STWMS
